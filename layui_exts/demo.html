@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="../layui/css/layui.css">
 <body>
 <div style="width: 90%;margin: 15px auto;">
-    <textarea name="" id="edit" cols="30" rows="10">这里是初始化的内容</textarea>
+    <textarea name="" id="edit" cols="30" rows="10">这里是<span style="color: #e03e2d;"><em>初始化</em></span>的内容</textarea>
     <div class="layui-btn-group" style="margin-top: 10px">
         <button class="layui-btn" lay-event="getContent">获取内容</button>
         <button class="layui-btn" lay-event="setContent">设置内容</button>
+        <button class="layui-btn" lay-event="getText">获取文本内容</button>
         <button class="layui-btn" lay-event="clearContent">清空内容</button>
     </div>
 </div>
@@ -41,10 +42,14 @@
                 layer.alert(content)
             },
             setContent:()=>{
-                edit.setContent('点击按钮设置的内容：' + new Date())
+                edit.setContent('点击按钮设置的内容：<span style="color: #e03e2d;">' + new Date())+'</span>'
             },
             clearContent:()=>{
                 edit.setContent('')
+            },
+            getText:()=>{
+                var text = edit.getContent({format:'text'})
+                layer.alert(text)
             }
         });
 
