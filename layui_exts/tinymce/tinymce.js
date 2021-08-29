@@ -39,7 +39,8 @@ layui.define(['jquery'],function (exports) {
 
     var t = {};
 
-    t.render = function (option) {
+    //初始化
+    t.render = function (option,callback) {
 
         var admin = layui.admin || {}
 
@@ -132,11 +133,74 @@ layui.define(['jquery'],function (exports) {
             async: false,
         });
 
+        layui.sessionData('layui-tinymce',{
+
+            key:option.selector,
+
+            value:option
+
+        })
+
         tinymce.init(option);
 
-        t.tinymce = tinymce;
+        if(typeof callback == 'function'){
+
+            callback.call(option)
+
+        }
 
         return tinymce.activeEditor;
     };
+
+    t.init = t.render
+
+    // 获取ID对应的编辑器对象
+    t.get = (elem) => {
+
+        if(elem && /^#|\./.test(elem)){
+
+            var id = elem.substr(1)
+
+            var edit = tinymce.editors[id];
+
+            if(!edit){
+
+                return console.error("编辑器未加载")
+
+            }
+
+            return edit
+
+        } else {
+
+            return console.error("elem错误")
+
+        }
+    }
+
+    //重载
+    t.reload = (option,callback) => {
+        option = option || {}
+
+        var edit = t.get(option.elem);
+
+        var optionCache = layui.sessionData('layui-tinymce')[option.elem]
+
+        edit.destroy()
+
+        $.extend(optionCache,option)
+
+        tinymce.init(optionCache)
+
+        if(typeof callback == 'function'){
+
+            callback.call(optionCache)
+
+        }
+
+        return tinymce.activeEditor;
+    }
+
+
     exports('tinymce', t);
 });
