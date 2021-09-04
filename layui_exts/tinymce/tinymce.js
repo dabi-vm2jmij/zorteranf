@@ -122,16 +122,19 @@ layui.define(['jquery'],function (exports) {
             },
             table: {title: '表格', items: 'inserttable tableprops deletetable | cell row column'},
         };
+        if(typeof tinymce == 'undefined'){
 
-        $.ajax({//获取插件
-            url: option.base_url + '/tinymce.js',
+            $.ajax({//获取插件
+                url: option.base_url + '/tinymce.js',
 
-            dataType: 'script',
+                dataType: 'script',
 
-            cache: true,
+                cache: true,
 
-            async: false,
-        });
+                async: false,
+            });
+
+        }
 
         layui.sessionData('layui-tinymce',{
 
