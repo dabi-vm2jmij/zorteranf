@@ -10,6 +10,7 @@
 <body>
 <div style="width: 90%;margin: 15px auto;">
     <textarea name="" id="edit">这里是<span style="color: #e03e2d;"><em>edit初始化</em></span>的内容</textarea>
+    <hr />
     <div class="layui-btn-group" style="margin-top: 10px">
         <button class="layui-btn" lay-event="setContent">设置内容</button>
         <button class="layui-btn" lay-event="insertContent">插入内容</button>
@@ -17,6 +18,8 @@
         <button class="layui-btn" lay-event="getText">获取文本</button>
         <button class="layui-btn" lay-event="clearContent">清空内容</button>
         <button class="layui-btn" lay-event="reload">重载编辑器</button>
+        <button class="layui-btn" lay-event="destroy">销毁编辑器</button>
+        <button class="layui-btn" lay-event="render">加载编辑器</button>
     </div>
     <br /><hr />
     同时插入第二个编辑器，配置相互独立
@@ -35,7 +38,6 @@
         var tinymce = layui.tinymce
 
         var util = layui.util;
-        console.log(tinymce)
 
         var edit = tinymce.render({
             elem: "#edit"
@@ -78,6 +80,12 @@
                     //重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
                     tinymce.get('#edit').setContent('')
                 })
+            },
+            destroy:()=>{
+                tinymce.get('#edit').destroy()
+            },
+            render:()=>{
+                tinymce.render({elem:'#edit',height:'500px'})
             }
         });
 
