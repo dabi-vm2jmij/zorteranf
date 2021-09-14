@@ -44,31 +44,31 @@ layui.define(['jquery'],function (exports) {
 
         var admin = layui.admin || {}
 
-        option.base_url = option.base_url ? option.base_url : settings.base_url
+        option.base_url = isset(option.base_url) ? option.base_url : settings.base_url
 
-        option.language = option.language ? option.language : settings.language
+        option.language = isset(option.language) ? option.language : settings.language
 
-        option.selector = option.selector ? option.selector : option.elem
+        option.selector = isset(option.selector) ? option.selector : option.elem
 
-        // option.quickbars_selection_toolbar = option.quickbars_selection_toolbar ? option.quickbars_selection_toolbar : 'cut copy | bold italic underline strikethrough '
+        option.quickbars_selection_toolbar = isset(option.quickbars_selection_toolbar) ? option.quickbars_selection_toolbar : 'cut copy | bold italic underline strikethrough '
 
-        option.plugins = option.plugins ? option.plugins : 'print preview searchreplace autolink fullscreen image link media codesample table charmap hr advlist lists wordcount imagetools indent2em';
+        option.plugins = isset(option.plugins) ? option.plugins : 'quickbars print preview searchreplace autolink fullscreen image link media codesample table charmap hr advlist lists wordcount imagetools indent2em';
 
-        option.toolbar = option.toolbar ? option.toolbar : 'undo redo | forecolor backcolor bold italic underline strikethrough | indent2em alignleft aligncenter alignright alignjustify outdent indent | link bullist numlist image table codesample | formatselect fontselect fontsizeselect';
+        option.toolbar = isset(option.toolbar) ? option.toolbar : 'undo redo | forecolor backcolor bold italic underline strikethrough | indent2em alignleft aligncenter alignright alignjustify outdent indent | link bullist numlist image table codesample | formatselect fontselect fontsizeselect';
 
-        option.resize = false;
+        option.resize = isset(option.resize) ? option.resize : false;
 
-        option.elementpath = false
+        option.elementpath = isset(option.elementpath) ? option.elementpath : false;
 
-        option.branding = false;
+        option.branding = isset(option.branding) ? option.branding : false;
 
-        option.contextmenu_never_use_native = true;
+        option.contextmenu_never_use_native = isset(option.contextmenu_never_use_native) ? option.contextmenu_never_use_native : true;
 
-        option.menubar = option.menubar ? option.menubar : 'file edit insert format table';
+        option.menubar = isset(option.menubar) ? option.menubar : 'file edit insert format table';
 
-        option.images_upload_url = option.images_upload_url ? option.images_upload_url : settings.images_upload_url;
+        option.images_upload_url = isset(option.images_upload_url) ? option.images_upload_url : settings.images_upload_url;
 
-        option.images_upload_handler = option.images_upload_handler? option.images_upload_handler : function (blobInfo, succFun, failFun) {
+        option.images_upload_handler = isset(option.images_upload_handler) ? option.images_upload_handler : function (blobInfo, succFun, failFun) {
 
             var formData = new FormData();
 
@@ -113,7 +113,7 @@ layui.define(['jquery'],function (exports) {
             }
         }
 
-        option.menu = option.menu ? option.menu : {
+        option.menu = isset(option.menu) ? option.menu : {
             file: {title: '文件', items: 'newdocument | print preview fullscreen | wordcount'},
             edit: {title: '编辑', items: 'undo redo | cut copy paste pastetext selectall | searchreplace'},
             format: {
@@ -204,6 +204,9 @@ layui.define(['jquery'],function (exports) {
         return tinymce.activeEditor;
     }
 
+    function isset(value){
+        return typeof value != 'undefined' && value != null
+    }
 
     exports('tinymce', t);
 });
