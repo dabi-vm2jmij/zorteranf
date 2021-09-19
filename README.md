@@ -53,7 +53,8 @@
             edit.setContent('')
         })
         
-                
+        // 销毁编辑器
+        edit.destroy()        
     })
 </script>
 ```
