@@ -43,7 +43,7 @@
             , height: 600
             // ...
             // 其余配置可参考官方文档
-        },(opt)=>{
+        },function(opt){
             //加载完成后回调
         });
 
@@ -53,37 +53,37 @@
         });
 
         util.event('lay-event', {
-            getContent:() => {
+            getContent:function() {
                 var content = t.get('#edit').getContent()
                 layer.alert(content)
             },
-            setContent:() => {
+            setContent:function() {
                 t.get('#edit').setContent('点击按钮设置的内容：<span style="color: #e03e2d;">' + new Date()+'</span>')
             },
-            clearContent:() => {
+            clearContent:function() {
                 t.get('#edit').setContent('')
             },
-            insertContent:() => {
+            insertContent:function() {
                 t.get('#edit').insertContent('<b>插入内容</b>')
             },
-            getText:() => {
+            getText:function() {
                 var text = t.get('#edit').getContent({format:'text'})
                 layer.alert(text)
             },
-            reload:() => {
+            reload:function() {
                 t.reload({
                     elem:'#edit'
                     // 所有参数都可以重新设置 ...
-                },(opt) => {
+                },function(opt){
                     //重载完成后回调函数，会把所有参数回传，
                     //重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
                     t.get('#edit').setContent('')
                 })
             },
-            destroy:()=>{
+            destroy:function(){
                 t.get('#edit').destroy()
             },
-            render:()=>{
+            render:function(){
                 t.render({elem:'#edit',height:'500px'})
             }
         });
@@ -91,4 +91,21 @@
 
     });
 </script>
+<style>
+    .tox .tox-dialog{
+        border: none;
+    }
+
+    .tox .tox-dialog,
+    .tox .tox-button,
+    .tox .tox-textarea,
+    .tox .tox-textfield,
+    .tox .tox-selectfield select,
+    .tox .tox-toolbar-textfield{
+        border-radius: 0;
+    }
+    .tox .tox-dialog-wrap__backdrop{
+        background-color: rgba(0, 0, 0, .3);
+    }
+</style>
 </html>

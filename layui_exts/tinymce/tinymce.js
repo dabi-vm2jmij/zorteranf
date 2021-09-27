@@ -158,7 +158,7 @@ layui.define(['jquery'],function (exports) {
     t.init = t.render
 
     // 获取ID对应的编辑器对象
-    t.get = (elem) => {
+    t.get = function (elem) {
 
         if(elem && /^#|\./.test(elem)){
 
@@ -182,7 +182,7 @@ layui.define(['jquery'],function (exports) {
     }
 
     //重载
-    t.reload = (option,callback) => {
+    t.reload = function (option,callback) {
         option = option || {}
 
         var edit = t.get(option.elem);
