@@ -204,6 +204,17 @@ layui.define(['jquery'],function (exports) {
         return tinymce.activeEditor;
     }
 
+    // 适配单页应用的渲染
+    t.autoRender = function (option, callback) {
+        if (typeof tinymce == 'undefined') {
+            return t.render(option, callback);
+        }
+        if (!tinymce.editors[option.elem.substr(1)]) {
+            return t.render(option, callback);
+        }
+        return t.reload(option, callback);
+    }
+
     function isset(value){
         return typeof value != 'undefined' && value != null
     }
