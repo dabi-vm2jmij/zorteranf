@@ -113,6 +113,11 @@ layui.define(['jquery'],function (exports) {
             }
         }
 
+        var edit = t.get(option.elem);
+        if (edit) {
+            edit.destroy();
+        }
+
         option.menu = isset(option.menu) ? option.menu : {
             file: {title: '文件', items: 'newdocument | print preview fullscreen | wordcount'},
             edit: {title: '编辑', items: 'undo redo | cut copy paste pastetext selectall | searchreplace'},
@@ -159,25 +164,26 @@ layui.define(['jquery'],function (exports) {
 
     // 获取ID对应的编辑器对象
     t.get = function (elem) {
+        if (typeof tinymce == 'undefined') {
+            $.ajax({//获取插件
+                url: settings.base_url + '/tinymce.js',
 
-        if(elem && /^#|\./.test(elem)){
+                dataType: 'script',
 
-            var id = elem.substr(1)
+                cache: true,
+
+                async: false,
+            });
+        }
+        if (elem && /^#|\./.test(elem)) {
+
+            var id = elem.substr(1);
 
             var edit = tinymce.editors[id];
-
-            if(!edit){
-
-                return console.error("编辑器未加载")
-
-            }
-
+            
             return edit
-
         } else {
-
-            return console.error("elem错误")
-
+            return false;
         }
     }
 
