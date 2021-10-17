@@ -14,6 +14,8 @@ layui.define(['jquery'],function (exports) {
 
     //  ----------------  以上代码无需修改  ----------------
 
+    var plugin_filename = 'tinymce.js'//插件路径，不包含base_url部分
+
     var settings = {
         base_url: modPath
         , images_upload_url: '/rest/upload'//图片上传接口，可在option传入，也可在这里修改，option的值优先
@@ -130,7 +132,7 @@ layui.define(['jquery'],function (exports) {
         if(typeof tinymce == 'undefined'){
 
             $.ajax({//获取插件
-                url: option.base_url + '/tinymce.js',
+                url: option.base_url + '/' + plugin_filename,
 
                 dataType: 'script',
 
@@ -166,7 +168,7 @@ layui.define(['jquery'],function (exports) {
     t.get = function (elem) {
         if (typeof tinymce == 'undefined') {
             $.ajax({//获取插件
-                url: settings.base_url + '/tinymce.js',
+                url: settings.base_url + '/' + plugin_filename,
 
                 dataType: 'script',
 
