@@ -18,7 +18,7 @@ layui.define(['jquery'],function (exports) {
 
     var settings = {
         base_url: modPath
-        , images_upload_url: '/rest/upload'//图片上传接口，可在option传入，也可在这里修改，option的值优先
+        , images_upload_url: ''//图片上传接口，可在option传入，也可在这里修改，option的值优先
         , language: 'zh_CN'//语言，可在option传入，也可在这里修改，option的值优先
         , response: {//后台返回数据格式设置
             statusName: response.statusName || 'code'//返回状态字段
@@ -46,6 +46,12 @@ layui.define(['jquery'],function (exports) {
 
         var admin = layui.admin || {}
 
+        var form = option.form || {}
+
+        var file_field = form.name || 'edit' //文件字段名
+
+        var form_data = form.data || [] //其他表单数据 {key:value, ...}
+
         option.base_url = isset(option.base_url) ? option.base_url : settings.base_url
 
         option.language = isset(option.language) ? option.language : settings.language
@@ -72,11 +78,27 @@ layui.define(['jquery'],function (exports) {
 
         option.images_upload_handler = isset(option.images_upload_handler) ? option.images_upload_handler : function (blobInfo, succFun, failFun) {
 
+            if(isEmpty(option.images_upload_url)){
+                
+                failFun("上传接口未配置");
+                
+                return console.error('images_upload_url未配置');
+            
+            }
+
             var formData = new FormData();
 
-            formData.append('target', 'edit');
+            formData.append(file_field, blobInfo.blob());
 
-            formData.append('edit', blobInfo.blob());
+            if(typeof form_data == 'object'){
+            
+                for(var key in form_data){
+            
+                    formData.append(key, form_data[key]);
+            
+                }
+            
+            }
 
             var ajaxOpt = {
 
@@ -116,17 +138,27 @@ layui.define(['jquery'],function (exports) {
         }
 
         var edit = t.get(option.elem);
+
         if (edit) {
+
             edit.destroy();
+
         }
 
         option.menu = isset(option.menu) ? option.menu : {
+
             file: {title: '文件', items: 'newdocument | print preview fullscreen | wordcount'},
+
             edit: {title: '编辑', items: 'undo redo | cut copy paste pastetext selectall | searchreplace'},
+
             format: {
+
                 title: '格式',
+
                 items: 'bold italic underline strikethrough superscript subscript | formats | forecolor backcolor | removeformat'
+           
             },
+            
             table: {title: '表格', items: 'inserttable tableprops deletetable | cell row column'},
         };
         if(typeof tinymce == 'undefined'){
@@ -140,7 +172,6 @@ layui.define(['jquery'],function (exports) {
 
                 async: false,
             });
-
         }
 
         layui.sessionData('layui-tinymce',{
@@ -148,15 +179,12 @@ layui.define(['jquery'],function (exports) {
             key:option.selector,
 
             value:option
-
         })
 
         tinymce.init(option);
 
         if(typeof callback == 'function'){
-
             callback.call(option)
-
         }
 
         return tinymce.activeEditor;
@@ -166,8 +194,11 @@ layui.define(['jquery'],function (exports) {
 
     // 获取ID对应的编辑器对象
     t.get = function (elem) {
+
         if (typeof tinymce == 'undefined') {
+
             $.ajax({//获取插件
+
                 url: settings.base_url + '/' + plugin_filename,
 
                 dataType: 'script',
@@ -184,6 +215,7 @@ layui.define(['jquery'],function (exports) {
             var edit = tinymce.editors[id];
             
             return edit
+
         } else {
             return false;
         }
@@ -191,6 +223,7 @@ layui.define(['jquery'],function (exports) {
 
     //重载
     t.reload = function (option,callback) {
+
         option = option || {}
 
         var edit = t.get(option.elem);
@@ -204,9 +237,7 @@ layui.define(['jquery'],function (exports) {
         tinymce.init(optionCache)
 
         if(typeof callback == 'function'){
-
             callback.call(optionCache)
-
         }
 
         return tinymce.activeEditor;
@@ -214,18 +245,25 @@ layui.define(['jquery'],function (exports) {
 
     // 适配单页应用的渲染
     t.autoRender = function (option, callback) {
+
         if (typeof tinymce == 'undefined') {
             return t.render(option, callback);
         }
+
         if (!tinymce.editors[option.elem.substr(1)]) {
             return t.render(option, callback);
         }
+
         return t.reload(option, callback);
     }
 
     function isset(value){
-        return typeof value != 'undefined' && value != null
+        return typeof value !== 'undefined' && value !== null
+    }
+    function isEmpty(value){
+        return typeof value === 'undefined' || value === null|| value === ''
     }
 
     exports('tinymce', t);
+
 });
