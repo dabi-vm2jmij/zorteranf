@@ -2,6 +2,7 @@
 
 [在线预览地址](http://chick1993.gitee.io/layui-tinymce/layui_exts/) | [Layui论坛讨论](https://fly.layui.com/jie/63668/) | [tinymce中文文档](http://tinymce.ax-z.cn/)
 ## 更新
+2020.11.06 默认上传方法上传图片时支持自定义字段名、支持同时上传其他数据<br>
 2020.08.24 tinymce更新到5.4.2
 ## 食用
 
