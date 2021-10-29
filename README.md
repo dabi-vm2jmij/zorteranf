@@ -8,7 +8,7 @@
 
 食用方式可参考tinymce官方文档
 
-### 引入插件
+### 引入编辑器
 ```
 layui.extend({
     tinymce: '{/}./tinymce/tinymce'
@@ -19,7 +19,8 @@ layui.extend({
     // ...
 })
 ```
-### 创建编辑器 t.render(option，load_callback)
+### 基础方法
+#### 创建编辑器 t.render(option，load_callback)
 ```
 <textarea id="edit"></textarea>
 
@@ -32,32 +33,32 @@ t.render({
 });
 
 ```
-### 获取编辑器实例 t.get(id)
+#### 获取编辑器实例 t.get(id)
 ```
 // 如果页面只有一个编辑器，等同于官方的tinymce.activeEditor
 // 如果页面有多个编辑器，等同于官方tinymce.editors[id]
 var edit = t.get('#edit')
 ```
-### 获取编辑器内容 edit.getContent(option)
+#### 获取编辑器内容 edit.getContent(option)
 ```
 edit.getContent()
 // 获取编辑器文本内容
 edit.getContent({format:'text'})
 ```
 
-### 插入内容 edit.insertContent(html)
+#### 插入内容 edit.insertContent(html)
 ```
 edit.insertContent('<b>插入内容</b>')
 ```
 
-### 设置内容 edit.setContent(html)
+#### 设置内容 edit.setContent(html)
 ```
 edit.setContent('<b>设置内容</b>')
 
 // 清空编辑器，将内容设置为空字符串即可
 edit.setContent('')
 ```
-### 重载编辑器 t.reload(option，load_callback)
+#### 重载编辑器 t.reload(option，load_callback)
 ```
 t.reload({
     elem:'#edit'
@@ -68,7 +69,7 @@ t.reload({
 })
 ```
 
-### 销毁编辑器
+#### 销毁编辑器 edit.destroy() 
 ```
 edit.destroy() 
 ```
