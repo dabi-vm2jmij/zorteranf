@@ -50,7 +50,7 @@ layui.define(['jquery'],function (exports) {
 
         var file_field = form.name || 'edit' //文件字段名
 
-        var form_data = form.data || [] //其他表单数据 {key:value, ...}
+        var form_data = form.data || {} //其他表单数据 {key:value, ...}
 
         option.base_url = isset(option.base_url) ? option.base_url : settings.base_url
 
@@ -161,18 +161,8 @@ layui.define(['jquery'],function (exports) {
             
             table: {title: '表格', items: 'inserttable tableprops deletetable | cell row column'},
         };
-        if(typeof tinymce == 'undefined'){
-
-            $.ajax({//获取插件
-                url: option.base_url + '/' + plugin_filename,
-
-                dataType: 'script',
-
-                cache: true,
-
-                async: false,
-            });
-        }
+        
+        initTinymce();
 
         layui.sessionData('layui-tinymce',{
 
@@ -195,19 +185,8 @@ layui.define(['jquery'],function (exports) {
     // 获取ID对应的编辑器对象
     t.get = function (elem) {
 
-        if (typeof tinymce == 'undefined') {
+        initTinymce();
 
-            $.ajax({//获取插件
-
-                url: settings.base_url + '/' + plugin_filename,
-
-                dataType: 'script',
-
-                cache: true,
-
-                async: false,
-            });
-        }
         if (elem && /^#|\./.test(elem)) {
 
             var id = elem.substr(1);
@@ -257,11 +236,30 @@ layui.define(['jquery'],function (exports) {
         return t.reload(option, callback);
     }
 
+    function initTinymce(){
+        if (typeof tinymce == 'undefined') {
+            $.ajax({//获取插件
+                url: settings.base_url + '/' + plugin_filename,
+                dataType: 'script',
+                cache: true,
+                async: false,
+            });
+        }
+    }
+
     function isset(value){
         return typeof value !== 'undefined' && value !== null
     }
+
     function isEmpty(value){
-        return typeof value === 'undefined' || value === null|| value === ''
+        if(typeof value === 'undefined' || value === null|| value === ''){
+            return true
+        } else if (value instanceof Array && value.length === 0){
+            return true
+        } else if (typeof value === 'object' && Object.keys(value).length === 0){
+            return true
+        }
+        return false
     }
 
     exports('tinymce', t);
