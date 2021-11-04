@@ -75,13 +75,23 @@ edit.destroy()
 ```
 
 ### 图片上传
->  上传接口的配置<br>
->  方法1. 修改layui_exts\tinymce\tinymce.js:21<br>
->  &nbsp;&nbsp;&nbsp;&nbsp;images_upload_url:'http(s)://yoursite/apipath'<br>
-> 方法2. 初始化时传入<br> 
-> &nbsp;&nbsp;&nbsp;&nbsp;t.render({images_upload_url:'http(s)://yoursite/apipath'})
+#### 配置上传接口
+##### 全局修改 layui_exts\tinymce\tinymce.js
 ```
-// 使用默认上传方法
+var settings = {
+    images_upload_url:'http(s)://yoursite/apipath'
+    // ...
+}
+```
+##### 初始化时传入
+``` 
+t.render({
+    images_upload_url:'http(s)://yoursite/apipath'
+    // ...
+})
+```
+#### 默认上传
+```
 t.render({
     elem: "#edit"  
     ,images_upload_url:'http(s)://yoursite/apipath'//配置上传接口
@@ -90,8 +100,10 @@ t.render({
         ,data:{ key:'value', ... } //其他需要一起上传的数据
     }
 });
+```
 
-// 使用自定义上传方法,
+#### 自定义上传
+```
 // 回调函数 参数1：上传的文件数据，参数2：上传成功回调，参数3：上传异常回调
 t.render({
     elem: "#edit"  
