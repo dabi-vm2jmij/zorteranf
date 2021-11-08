@@ -41,6 +41,7 @@ var edit = t.get('#edit')
 ```
 #### 获取内容 edit.getContent(option)
 ```
+// 获取编辑器HTML内容
 edit.getContent()
 // 获取编辑器文本内容
 edit.getContent({format:'text'})
