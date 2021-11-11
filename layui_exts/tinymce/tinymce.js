@@ -1,4 +1,3 @@
-//  菜单显示异常修改tinymce/skins/ui/oxide/skin.min.css:96 .tox-silver-sink的z-index值
 //  http://tinymce.ax-z.cn/   中文文档
 
 layui.define(['jquery'],function (exports) {
@@ -14,7 +13,7 @@ layui.define(['jquery'],function (exports) {
 
     //  ----------------  以上代码无需修改  ----------------
 
-    var plugin_filename = 'tinymce.js'//插件路径，不包含base_url部分
+    var plugin_filename = 'tinymce.min.js'//插件路径，不包含base_url部分
 
     var settings = {
         base_url: modPath
@@ -51,6 +50,8 @@ layui.define(['jquery'],function (exports) {
         var file_field = form.name || 'edit' //文件字段名
 
         var form_data = form.data || {} //其他表单数据 {key:value, ...}
+
+        option.suffix= isset(option.suffix) ? option.suffix : (plugin_filename.indexOf('.min')>-1 ? '.min' : '')
 
         option.base_url = isset(option.base_url) ? option.base_url : settings.base_url
 
