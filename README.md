@@ -33,6 +33,18 @@ t.render({
 });
 
 ```
+
+#### 重载 t.reload(option，load_callback)
+```
+t.reload({
+    elem:'#edit'
+    // 所有参数都可以重新设置 ...
+},(opt) => {
+    //重载完成后回调函数，会把所有参数回传，
+    //重载仅仅重新渲染编辑器，不会清空textarea，可手动设置
+})
+```
+
 #### 编辑器实例 t.get(id)
 ```
 // 如果页面只有一个编辑器，等同于官方的tinymce.activeEditor
@@ -59,15 +71,10 @@ edit.setContent('<b>设置内容</b>')
 // 清空编辑器，将内容设置为空字符串即可
 edit.setContent('')
 ```
-#### 重载 t.reload(option，load_callback)
+
+#### 清空内容
 ```
-t.reload({
-    elem:'#edit'
-    // 所有参数都可以重新设置 ...
-},(opt) => {
-    //重载完成后回调函数，会把所有参数回传，
-    //重载仅仅重新渲染编辑器，不会清空textarea，可手动设置
-})
+edit.resetContent()
 ```
 
 #### 销毁 edit.destroy() 
