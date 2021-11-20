@@ -9,9 +9,8 @@
 <link rel="stylesheet" href="../layui/css/layui.css">
 <body>
 <div style="width: 90%;margin: 15px auto;">
-    <textarea name="" id="edit">这里是<span style="color: #e03e2d;"><em>edit初始化</em></span>的内容</textarea>
-    <hr />
     <div class="layui-btn-group" style="margin-top: 10px">
+        <button class="layui-btn layui-btn-danger" lay-event="layerTiny">弹窗调用</button>
         <button class="layui-btn" lay-event="setContent">设置内容</button>
         <button class="layui-btn" lay-event="insertContent">插入内容</button>
         <button class="layui-btn" lay-event="getContent">获取内容</button>
@@ -21,14 +20,18 @@
         <button class="layui-btn" lay-event="destroy">销毁编辑器</button>
         <button class="layui-btn" lay-event="render">加载编辑器</button>
     </div>
+    <hr />
+    <textarea name="" id="edit">这里是<span style="color: #e03e2d;"><em>edit初始化</em></span>的内容</textarea>
     <br /><hr />
     同时插入第二个编辑器，配置相互独立
     <hr />
     <textarea name="" id="edit2">这里是<span style="color: #e03e2d;"><em>edit2初始化</em></span>的内容</textarea>
-
 </div>
-
+<div id="layer-tiny" style="display: none;">
+    <textarea name="" id="edit3"></textarea>
+</div>
 </body>
+
 <script src="../layui/layui.js"></script>
 <script>
     /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
@@ -36,11 +39,13 @@
         tinymce: '{/}./tinymce/tinymce'
     }).use(['tinymce', 'util', 'layer'], function () {
         var t = layui.tinymce
-        var util = layui.util;
+        , util = layui.util
+        , layer = layui.layer
+        , $ = layui.$
 
         var edit = t.render({
             elem: "#edit"
-            , height: 600
+            , height: 200
             // ...
             // 其余配置可参考官方文档
         },function(opt){
@@ -52,7 +57,20 @@
             , height: 200
         });
 
+
         util.event('lay-event', {
+            layerTiny:function() {
+                layer.open({
+                    type: 1
+                    ,content:$('#layer-tiny')
+                    ,success:function(){
+                        t.render({
+                            elem: "#edit3"
+                            , height: 200
+                        });
+                    }
+                })
+            },
             getContent:function() {
                 var content = t.get('#edit').getContent()
                 layer.alert(content)
