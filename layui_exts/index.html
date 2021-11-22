@@ -11,6 +11,7 @@
 <div style="width: 90%;margin: 15px auto;">
     <div class="layui-btn-group" style="margin-top: 10px">
         <button class="layui-btn layui-btn-danger" lay-event="layerTiny">弹窗调用</button>
+        <button class="layui-btn" lay-event="setByAjax">Ajax加载数据</button>
         <button class="layui-btn" lay-event="setContent">设置内容</button>
         <button class="layui-btn" lay-event="insertContent">插入内容</button>
         <button class="layui-btn" lay-event="getContent">获取内容</button>
@@ -59,6 +60,14 @@
 
 
         util.event('lay-event', {
+            setByAjax:function() {
+                $.ajax({
+                    url:'mock/content.json',
+                    success:function(res){
+                        edit.setContent(res.data.content)
+                    }
+                })
+            },
             layerTiny:function() {
                 layer.open({
                     type: 1

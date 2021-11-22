@@ -123,3 +123,7 @@ t.render({
 ### 更多配置  
 > [中文配置文档](http://tinymce.ax-z.cn/configure/integration-and-setup.php)  
 > [官方文档(英语)](https://www.tiny.cloud/docs/)
+
+### 常见问题
+##### Q1. 在弹窗里面使用时，菜单定位在弹窗下面怎么办
+> layui_exts\tinymce\tinymce\skins\ui\oxide\skin.min.css 这个文件里的所有大于1的z-index后面加五个0
