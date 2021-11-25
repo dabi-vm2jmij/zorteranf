@@ -24,24 +24,32 @@ layui.extend({
 ```
 <textarea id="edit"></textarea>
 
-// 调用 t.render(option，load_callback) 创建编辑器
 t.render({
     elem: "#edit"  
     // 支持tinymce所有配置      
-},(opt)=>{
-    //加载完成后回调 opt 是传入的所有参数
+},(opt, edit)=>{
+    // 加载完成后回调 opt 是传入的所有参数
+    // edit是当前编辑器实例，等同于t.get返回值
 });
 
 ```
 
 #### 重载 t.reload(option，load_callback)
 ```
+// 方式一
 t.reload({
     elem:'#edit'
-    // 所有参数都可以重新设置 ...
-},(opt) => {
+    // 除elem外，所有参数都可以重新设置
+},(opt, edit) => {
     //重载完成后回调函数，会把所有参数回传，
-    //重载仅仅重新渲染编辑器，不会清空textarea，可手动设置
+    //重载仅仅重新渲染编辑器，不会清空textarea
+})
+
+// 方式二
+t.reload('#edit',{
+    // 除elem外，所有参数都可以重新设置
+},(opt, edit) => {
+
 })
 ```
 

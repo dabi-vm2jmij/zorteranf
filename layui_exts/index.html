@@ -17,9 +17,10 @@
         <button class="layui-btn" lay-event="getContent">获取内容</button>
         <button class="layui-btn" lay-event="getText">获取文本</button>
         <button class="layui-btn" lay-event="clearContent">清空内容</button>
-        <button class="layui-btn" lay-event="reload">重载编辑器</button>
-        <button class="layui-btn" lay-event="destroy">销毁编辑器</button>
-        <button class="layui-btn" lay-event="render">加载编辑器</button>
+        <button class="layui-btn" lay-event="reload">重载(方式一)</button>
+        <button class="layui-btn" lay-event="reload2">重载(方式二)</button>
+        <button class="layui-btn" lay-event="destroy">销毁</button>
+        <button class="layui-btn" lay-event="render">加载(初始化)</button>
     </div>
     <hr />
     <textarea name="" id="edit">这里是<span style="color: #e03e2d;"><em>edit初始化</em></span>的内容</textarea>
@@ -49,7 +50,7 @@
             , height: 200
             // ...
             // 其余配置可参考官方文档
-        },function(opt){
+        },function(opt,edit){
             //加载完成后回调
         });
 
@@ -57,14 +58,13 @@
             elem: "#edit2"
             , height: 200
         });
-
-
+        
         util.event('lay-event', {
             setByAjax:function() {
                 $.ajax({
                     url:'mock/content.json',
                     success:function(res){
-                        edit.setContent(res.data.content)
+                        t.get('#edit').setContent(res.data.content)
                     }
                 })
             },
@@ -99,19 +99,30 @@
             },
             reload:function() {
                 t.reload({
-                    elem:'#edit'
+                    elem:'#edit',
+                    height:230
                     // 所有参数都可以重新设置 ...
-                },function(opt){
-                    //重载完成后回调函数，会把所有参数回传，
-                    //重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
+                },function(opt,edit){
+                    // 重载完成后回调函数，会把所有参数回传，
+                    // 重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
                     t.get('#edit').setContent('')
+                })
+            },
+            reload2:function() {
+                t.reload('#edit',{
+                    height:250
+                    // 所有参数都可以重新设置 ...
+                },function(opt,edit){
+                    // 重载完成后回调函数，会把所有参数回传，
+                    // 重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
+                    edit.setContent('')
                 })
             },
             destroy:function(){
                 t.get('#edit').destroy()
             },
             render:function(){
-                t.render({elem:'#edit',height:'500px'})
+                t.render({elem:'#edit',height:'300px'})
             }
         });
 
