@@ -109,6 +109,7 @@ t.render({
 ```
 #### 默认上传
 ```
+// 上传配置
 t.render({
     elem: "#edit"  
     ,images_upload_url:'http(s)://yoursite/apipath'//配置上传接口
@@ -117,6 +118,11 @@ t.render({
         ,data:{ key:'value', ... } //其他需要一起上传的数据
     }
 });
+
+// 如果没有做任何修改，
+// layui-admin中以admin设置为准；单独引用默认的后端返回数据格式需要如下
+// {"code": 0, "msg": "success", "data": "/demo/demo.jpg"}，
+// code-等于0表示成功，msg-返回的消息，data-返回给前端的图片地址
 ```
 
 #### 自定义上传
