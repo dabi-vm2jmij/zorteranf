@@ -57,6 +57,12 @@
         t.render({
             elem: "#edit2"
             , height: 200
+            , init_instance_callback : function(ed) {
+                ed.on('KeyPress', function (e) {
+                    console.log(e)
+                });
+            }
+
         });
         
         util.event('lay-event', {
@@ -126,8 +132,9 @@
             }
         });
 
-
     });
+
+    
 </script>
 <style>
     .tox .tox-dialog{
