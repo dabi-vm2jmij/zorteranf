@@ -139,16 +139,16 @@ t.render({
 ### 高级
 #### 事件监听  
 ```
-        t.render({
-            elem: "#edit"
-            , height: 200
-            , init_instance_callback : function(ed) {
-                ed.on('click', function (e) { 
-                    // 监听编辑器内部的点击事件
-                });
-            }
-
+t.render({
+    elem: "#edit"
+    , height: 200
+    , init_instance_callback : function(ed) {
+        ed.on('click', function (e) { 
+            // 监听编辑器内部的点击事件
         });
+    }
+
+});
 ```
 ##### 原生事件
 | 事件 | 描述 |
