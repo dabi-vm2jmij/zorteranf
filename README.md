@@ -137,20 +137,20 @@ t.render({
 ```
 
 ### 高级
-#### 事件监听  
+#### 事件监听&nbsp;&nbsp;&nbsp;&nbsp;查看[原版文档](https://www.tiny.cloud/docs-4x/advanced/events/)
 ```
 t.render({
     elem: "#edit"
     , height: 200
     , init_instance_callback : function(ed) {
-        ed.on('click', function (e) { 
+        ed.on('Click', function (e) { 
             // 监听编辑器内部的点击事件
         });
     }
 
 });
 ```
-##### 原生事件
+##### 原生事件(区分大小写)
 | 事件 | 描述 |
 | --- | --- | 
 | Click | 单击编辑器时触发 |
@@ -168,7 +168,7 @@ t.render({
 | ContextMenu | 在编辑器中调用上下文菜单时触发 |  
 | Paste | 在编辑器中完成粘贴时触发 |  
 
-##### 编辑器事件
+##### 编辑器事件(区分大小写)
 | 事件 | 描述 |
 | --- | --- | 
 | Init | 在编辑器初始化时触发 |
