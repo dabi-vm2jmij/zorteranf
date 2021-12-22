@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Layui-Tinymce</title>
 </head>
-<link rel="stylesheet" href="/layui/css/layui.css">
+<link rel="stylesheet" href="./layui/css/layui.css">
 <body>
 <div style="width: 90%;margin: 15px auto;">
     <div class="layui-btn-group" style="margin-top: 10px">
@@ -34,11 +34,11 @@
 </div>
 </body>
 
-<script src="/layui/layui.js"></script>
+<script src="./layui/layui.js"></script>
 <script>
     /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
     layui.extend({
-        tinymce: '{/}/layui_exts/tinymce/tinymce'
+        tinymce: '{/}./layui_exts/tinymce/tinymce'
     }).use(['tinymce', 'util', 'layer'], function () {
         var t = layui.tinymce
         , util = layui.util
@@ -68,7 +68,7 @@
         util.event('lay-event', {
             setByAjax:function() {
                 $.ajax({
-                    url:'/layui_exts/mock/content.json',
+                    url:'./layui_exts/mock/content.json',
                     success:function(res){
                         t.get('#edit').setContent(res.data.content)
                     }
