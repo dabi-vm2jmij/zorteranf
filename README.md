@@ -1,6 +1,6 @@
 # layui-tinymce
 
-[在线预览](http://chick1993.gitee.io/layui-tinymce/layui_exts/) | [Layui论坛](https://fly.layui.com/jie/63668/) | [tinymce中文文档](http://tinymce.ax-z.cn/)
+[在线预览](http://chick1993.gitee.io/layui-tinymce/) | [Layui论坛](https://fly.layui.com/jie/63668/) | [tinymce中文文档](http://tinymce.ax-z.cn/)
 ## 更新
 2021.01.04 tinymce更新到5.6.2  
 2020.11.06 tinymce更新到5.5.1，上传图片时支持自定义字段名、支持同时上传其他数据<br>
@@ -135,58 +135,6 @@ t.render({
     }
 })
 ```
-
-### 高级
-#### 事件监听&nbsp;&nbsp;&nbsp;&nbsp;查看[原版文档](https://www.tiny.cloud/docs-4x/advanced/events/)
-```
-t.render({
-    elem: "#edit"
-    , height: 200
-    , init_instance_callback : function(ed) {
-        ed.on('Click', function (e) { 
-            // 监听编辑器内部的点击事件
-        });
-    }
-
-});
-```
-##### 原生事件(区分大小写)
-| 事件 | 描述 |
-| --- | --- | 
-| Click | 单击编辑器时触发 |
-| DblClick | 双击编辑器时触发 |  
-| MouseDown | 在编辑器中按下鼠标按钮时触发 |  
-| MouseUp | 在编辑器中释放鼠标按钮时触发 |  
-| MouseMove | 在编辑器中移动鼠标时触发 |  
-| MouseOver | 鼠标移入时触发 |  
-| MouseOut | 鼠标移出时触发 |  
-| MouseEnter | 当鼠标进入编辑器时触发 |  
-| MouseLeave | 当鼠标离开编辑器时触发 |  
-| KeyDown | 在编辑器中按某个键时触发 |  
-| KeyPress | 在编辑器中按下某个键时触发 |  
-| KeyUp | 在编辑器中释放键时触发 |  
-| ContextMenu | 在编辑器中调用上下文菜单时触发 |  
-| Paste | 在编辑器中完成粘贴时触发 |  
-
-##### 编辑器事件(区分大小写)
-| 事件 | 描述 |
-| --- | --- | 
-| Init | 在编辑器初始化时触发 |
-| Focus | 当编辑器聚焦时触发 |
-| Blur | 编辑器失去焦点时触发 |
-| BeforeSetContent | 在内容设置之前触发 |
-| SetContent | 在内容设置时触发 |
-| GetContent | 在获取内容时触发 |
-| PreProcess | 在序列化编辑器中的内容时触发 |
-| PostProcess | 在提交编辑器中的内容时触发 |
-| NodeChange | 更改编辑器中的选择时触发 |
-| Undo | 当内容恢复到以前的状态时触发 |
-| Redo | 还原撤消事件时触发 |
-| Change | 内容改变时触发 |
-| Dirty | Fires when editor contents are being considered dirty |
-| Remove | 删除编辑器时触发 |
-| ExecCommand | 在执行命令后触发 |
-
 ### 更多配置  
 > [中文配置文档](http://tinymce.ax-z.cn/configure/integration-and-setup.php)  
 > [官方文档(英语)](https://www.tiny.cloud/docs/)
